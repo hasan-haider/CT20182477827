@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block title %}Create Customer{% endblock %}
+
+{% block page %}
+
+<h1 class="display-3 text-center">Create new Customer</h1>
+<form action="" id="create_cust" method="post">
+	<div class="form-group">
+		<label for="ssn_id">Customer SSN id</label>
+		<input aria-describedby="helpId" autofocus class="form-control" id="ssn_id" max="999999999" min="100000000"
+		       name="" pattern=".{9}" required type="number">
+		<small class="text-muted" id="helpId">9 digit ID</small>
+	</div>
+	<div class="form-group">
+		<label for="cust_name">Customer Name</label>
+		<input class="form-control" id="cust_name" name="" required type="text">
+	</div>
+	<div class="form-group">
+		<label for="age">Age</label>
+		<input class="form-control" id="age" max="150" name="" required type="number">
+	</div>
+	<div class="form-group">
+		<label for="addr">Address</label>
+		<textarea class="form-control" id="addr" maxlength="150" name="" required rows="3"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="state">State</label>
+		<select class="form-control" id="state" name="state" onchange="set_city(this,city)" required size="1">
+			<option>for loop</option>
+			<option>in this</option>
+			<option>field</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="city">City</label>
+		<select class="form-control" id="city" name="" required>
+			<option>for loop</option>
+			<option>in this</option>
+			<option>field</option>
+		</select>
+	</div>
+	<button class="btn btn-primary" type="submit">Submit</button>
+	<br/>
+	<input class="btn btn-warning" onclick="resetFun()" type="button" value="Reset">
+</form>
+<script>
+function resetFun() {
+  document.getElementById("create_cust").reset();
+}
+
+</script>
+
+{% endblock %}
