@@ -1,6 +1,8 @@
 # CT20182477827
 Learning Flask xplore case study program
 
+Read and update notes
+
 Add comments with your names after editing existing codes
 Do not add virtual env files in git
 
