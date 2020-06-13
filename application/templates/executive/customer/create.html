@@ -25,24 +25,31 @@
 	</div>
 	<div class="form-group">
 		<label for="state">State</label>
-		<select class="form-control" id="state" name="state" onchange="set_city(this,city)" required size="1">
-			<option>for loop</option>
-			<option>in this</option>
-			<option>field</option>
+		<select id="countrySelect" size="1" onchange="makeSubmenu(this.value)">
+			<option value="" disabled selected>Choose State</option>
+			<option>Odisha</option>
+			<option>Maharashtra</option>
+			<option>Kerala</option>
 		</select>
 	</div>
 	<div class="form-group">
 		<label for="city">City</label>
-		<select class="form-control" id="city" name="" required>
-			<option>for loop</option>
-			<option>in this</option>
-			<option>field</option>
+		<select id="citySelect" size="1" >
+			<option value="" disabled selected>Choose City</option>
+			<option></option>
 		</select>
 	</div>
 	<button class="btn btn-primary" type="submit">Submit</button>
 	<br/>
 	<input class="btn btn-warning" onclick="resetFun()" type="button" value="Reset">
 </form>
+<script type="text/javascript" src="{{url_for('static',filename='js/custom.js')}}">
+
+
+</script>
+
+
+
 <script>
 function resetFun() {
   document.getElementById("create_cust").reset();
