@@ -7,3 +7,4 @@ We should add admin details in user db wich admin column as True(boolean)
 Admin can change its password
 Others cannot change their password.
 Admin can change others password and changed password will be sent via mail to users.
+
