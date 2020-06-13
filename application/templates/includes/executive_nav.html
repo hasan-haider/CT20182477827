@@ -8,11 +8,15 @@
 		Customer Management
 	</button>
 	<div aria-labelledby="triggerId" class="dropdown-menu">
-		<a class="dropdown-item" href="{{url_for('create_customer') }}">Create Customer</a>
-		<a class="dropdown-item" href="#">Update Customer</a>
-		<a class="dropdown-item" href="#">Delete customer</a>
+		<a class="dropdown-item"
+		   href="{{url_for('executives.create_customer') }}">Create Customer</a>
+		<a class="dropdown-item"
+		   href="{{url_for('executives.update_customer') }}">Update Customer</a>
+		<a class="dropdown-item"
+		   href="{{url_for('executives.delete_customer') }}">Delete customer</a>
 		<div class="dropdown-divider"></div>
-		<a class="dropdown-item" href="#">Customer Status</a>
+		<a class="dropdown-item"
+		   href="{{url_for('executives.customer_status') }}">Customer Status</a>
 	</div>
 </div>
 <div class="dropdown">
@@ -22,9 +26,9 @@
 		Account Management
 	</button>
 	<div aria-labelledby="triggerId1" class="dropdown-menu">
-		<a class="dropdown-item" href="{{url_for('create_account') }}">Create account</a>
+		<a class="dropdown-item" href="{{url_for('executives.create_account') }}">Create account</a>
 		<a class="dropdown-item" href="#">Update account</a>
-		<a class="dropdown-item" href="#">Delete account</a>
+		<a class="dropdown-item" href="{{url_for('executives.delete_account') }}">Delete account</a>
 		<div class="dropdown-divider"></div>
 		<a class="dropdown-item" href="#">Account Status</a>
 	</div>

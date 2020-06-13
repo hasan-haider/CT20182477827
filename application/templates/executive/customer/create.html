@@ -24,8 +24,8 @@
 		<textarea class="form-control" id="addr" maxlength="150" name="" required rows="3"></textarea>
 	</div>
 	<div class="form-group">
-		<label for="state">State</label>
-		<select id="countrySelect" size="1" onchange="makeSubmenu(this.value)">
+		<label for="stateSelect">State</label>
+		<select class="form-control" id="stateSelect" onchange="makeSubmenu(this.value)" size="1">
 			<option value="" disabled selected>Choose State</option>
 			<option>Odisha</option>
 			<option>Maharashtra</option>
@@ -33,28 +33,34 @@
 		</select>
 	</div>
 	<div class="form-group">
-		<label for="city">City</label>
-		<select id="citySelect" size="1" >
+		<label for="citySelect">City</label>
+		<select class="form-control" id="citySelect" size="1">
 			<option value="" disabled selected>Choose City</option>
 			<option></option>
 		</select>
 	</div>
-	<button class="btn btn-primary" type="submit">Submit</button>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<button class="btn btn-primary" type="submit">Submit</button>
+			</div>
+			<div class="col">
+				<input class="btn btn-warning" onclick="resetFun()" type="button" value="Reset">
+			</div>
+		</div>
+	</div>
+
 	<br/>
-	<input class="btn btn-warning" onclick="resetFun()" type="button" value="Reset">
 </form>
-<script type="text/javascript" src="{{url_for('static',filename='js/custom.js')}}">
-
-
-</script>
-
-
 
 <script>
 function resetFun() {
   document.getElementById("create_cust").reset();
+  document.getElementById("stateSelect").selectedIndex = 0;
+$('#citySelect')
+    .empty()
+    .append('<option selected="selected" value="" disabled>Choose city</option>');
 }
-
 </script>
 
 {% endblock %}

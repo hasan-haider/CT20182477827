@@ -1,10 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% block title %}Delete Customer{% endblock %}
 
-</body>
-</html>
+{% block page %}
+
+<h1 class="display-3 text-center">Delete Customer</h1>
+
+<div class="container">
+	<form action="" method="post">
+		<div class="row m-2">
+			<div class="col">
+				<label for="cust_id">Customer ID</label>
+			</div>
+			<div class="col">
+				<!--add data in value -->
+				<input class="form-control" disabled id="cust_id" name="cust_id" pattern=".{9}" required type="number"
+				       value="">
+
+			</div>
+		</div>
+
+		<div class="row m-2">
+			<div class="col">
+				<label for="cust_ssnid">Customer ID</label>
+			</div>
+			<div class="col">
+
+				<input class="form-control" disabled id="cust_ssnid" name="cust_ssnid" pattern=".{9}" required
+				       type="number" value="">
+			</div>
+		</div>
+
+		<div class="row m-2">
+			<div class="col">
+				<label for="cust_name">Old Customer Name</label>
+			</div>
+			<div class="col">
+
+				<input class="form-control" disabled id="cust_name" name="cust_name" required type="text" value="">
+			</div>
+		</div>
+
+		<div class="row m-2">
+			<div class="col">
+				<label for="cust_addr">Old Address</label>
+			</div>
+			<div class="col">
+				<input class="form-control" disabled id="cust_addr" name="cust_addr" required type="text" value="">
+			</div>
+		</div>
+
+		<div class="row m-2">
+			<div class="col">
+				<label for="cust_age">Age</label>
+			</div>
+			<div class="col">
+
+				<input class="form-control" disabled id="cust_age" name="cust_age" required type="text" value="">
+			</div>
+		</div>
+
+		<div class="row m-3 text-center">
+			<div class="col">
+				<input class="btn btn-danger" type="submit" value="Confirm Delete"></input>
+			</div>
+		</div>
+	</form>
+	<div class="row m-3 text-center">
+		<div class="col">
+			<a class="btn btn-primary"
+			   href="{{url_for('routes.index')}}">
+				Cancel
+			</a>
+		</div>
+	</div>
+
+</div>
+
+
+{% endblock %}

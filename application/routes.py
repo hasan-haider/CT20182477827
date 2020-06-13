@@ -1,22 +1,14 @@
-from application import app
-from flask import render_template, request
+from flask import render_template, Blueprint, request, redirect, url_for, abort, flash
+
+unauth_routes = Blueprint('routes', __name__)
 
 
-@app.route('/')
+@unauth_routes.route('/')
 def index():
     return render_template('index.html', login='executive')
     # edit login='val' to see navbar change val in ['False','cashier','executive']
 
 
-# customer form added with regex
-# frontend completed for create customer
-@app.route('/create-customer')
-def create_customer():
-    return render_template('executive/customer/create.html', login='executive')
-
-
-# account form added with regex
-# frontend completed for create account
-@app.route('/create-account')
-def create_account():
-    return render_template('executive/account/create.html', login='executive')
+@unauth_routes.route('/login')
+def login():
+    return render_template('auth/login.html', login='False')
