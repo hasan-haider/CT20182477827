@@ -9,6 +9,9 @@
 	</button>
 	<div aria-labelledby="triggerId" class="dropdown-menu">
 		<a class="dropdown-item"
+		   href="{{url_for('executives.search_customer') }}">Search Customer</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item"
 		   href="{{url_for('executives.create_customer') }}">Create Customer</a>
 		<a class="dropdown-item"
 		   href="{{url_for('executives.update_customer') }}">Update Customer</a>
@@ -26,10 +29,12 @@
 		Account Management
 	</button>
 	<div aria-labelledby="triggerId1" class="dropdown-menu">
+		<a class="dropdown-item"
+		   href="{{url_for('executives.search_account') }}">Search Account</a>
+		<div class="dropdown-divider"></div>
 		<a class="dropdown-item" href="{{url_for('executives.create_account') }}">Create account</a>
-		<a class="dropdown-item" href="#">Update account</a>
 		<a class="dropdown-item" href="{{url_for('executives.delete_account') }}">Delete account</a>
 		<div class="dropdown-divider"></div>
-		<a class="dropdown-item" href="#">Account Status</a>
+		<a class="dropdown-item" href="{{url_for('executives.account_status') }}">Account Status</a>
 	</div>
 </div>

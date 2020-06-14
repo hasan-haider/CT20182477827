@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% block title %}Transfer{% endblock %}
 
-</body>
-</html>
+{% block page %}
+
+<h1 class="display-3 text-center">Transfer Money</h1>
+<form action="" method="post">
+	<div class="container text-center">
+		<table class="table">
+			<tbody>
+			<tr>
+				<th scope="col">Customer ID</th>
+				<td><input class="form-control" disabled id="cust_id" pattern=".{9}" type="number"></td>
+			</tr>
+			<tr>
+				<th scope="col">Source Account Type</th>
+				<td><select class="form-control" id="s_acc_type" name="s_acc_type" required size="1">
+					<option>Savings</option>
+					<option>Current</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th scope="col">Target Account Type</th>
+				<td><select class="form-control" id="t_acc_type" name="t_acc_type" required size="1">
+					<option>Savings</option>
+					<option>Current</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th scope="amt">Transfer Amount</th>
+				<td><input class="form-control" id="amt" placeholder="Enter amount" required type="number"></td>
+			</tr>
+			<tr>
+				<td><a class="btn btn-warning form-control" href="{{url_for('cashier.account_detail')}}">Cancel</a></td>
+				<td>
+					<button class="btn btn-primary form-control" type="submit">Withdraw</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</form>
+{% endblock %}

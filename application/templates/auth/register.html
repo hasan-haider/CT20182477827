@@ -8,22 +8,48 @@
 		Welcome to Xplore Bank
 	</div>
 	<div class="card-body text-center">
-		<form class="form-signin">
+		<form action="{{url_for('auth.signup_post')}}" class="form-signup" method="post">
 			<h1 class="display-1">Xplore Bank</h1>
 
-			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+			<h1 class="h3 mb-3 font-weight-normal">Registration Page</h1>
+
+			<div class="form-group">
+				<label class="sr-only" for="aadhar_number">Aadhar Number</label>
+				<input autofocus class="form-control" id="aadhar_number" name="aadhar_number" pattern=".{12}"
+				       placeholder="Aadhar" required type="number">
+			</div>
+
+			<div class="form-group">
+				<label class="sr-only" for="name">Name</label>
+				<input class="form-control" id="name" name="name" placeholder="Full name" required type="text">
+			</div>
+
+			<div class="form-group">
+				<label class="sr-only" for="email">Email</label>
+				<input class="form-control" id="email" name="email" placeholder="Email" required type="email">
+			</div>
 
 			<div class="form-group">
 				<label class="sr-only" for="uname">Username</label>
-				<input autofocus class="form-control" id="uname" placeholder="Username" required type="text">
+				<input class="form-control" id="uname" name="uname" placeholder="Username" required type="text">
 			</div>
 
 			<div class="form-group">
-				<label class="sr-only" for="inputPassword">Password</label>
-				<input class="form-control" id="inputPassword" name="" placeholder="Password" required type="password">
+				<label class="sr-only" for="password">Password</label>
+				<input class="form-control" id="password" name="password" placeholder="Password" required
+				       type="password">
 			</div>
 
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<div class="form-group">
+				<label for="job_type">Job Description</label>
+				<select class="form-control" id="job_type" id="job_type" name="job_type" required size="1">
+					<option disabled selected>Choose Job Type</option>
+					<option value="1">Customer Executive</option>
+					<option value="0">Cashier/Teller</option>
+				</select>
+			</div>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
 		</form>
 	</div>
 	<div class="card-footer text-muted">

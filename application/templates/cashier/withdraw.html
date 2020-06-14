@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% block title %}Withdraw{% endblock %}
 
-</body>
-</html>
+{% block page %}
+
+<h1 class="display-3 text-center">Withdraw Money</h1>
+<form action="" method="post">
+	<div class="container text-center">
+		<table class="table">
+			<tbody>
+			<tr>
+				<th scope="col">Customer ID</th>
+				<td><input disabled id="cust_id" pattern=".{9}" type="number"></td>
+			</tr>
+			<tr>
+				<th scope="col">Account ID</th>
+				<td><input disabled id="acct_id" pattern=".{9}" type="number"></td>
+			</tr>
+			<tr>
+				<th scope="col">Account Type</th>
+				<td><input disabled id="acct_type" type="text"></td>
+			</tr>
+			<tr>
+				<th scope="col">Balance</th>
+				<td><input disabled id="bal" type="number"></td>
+			</tr>
+			<tr>
+				<th scope="amt">Withdraw Amount</th>
+				<td><input id="amt" placeholder="Enter amount" required type="number"></td>
+			</tr>
+			<tr>
+				<td><a class="btn btn-warning form-control" href="{{url_for('cashier.account_detail')}}">Cancel</a></td>
+				<td>
+					<button class="btn btn-primary form-control" type="submit">Withdraw</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</form>
+{% endblock %}

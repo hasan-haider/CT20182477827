@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block title %}Customer Status{% endblock %}
+
+{% block page %}
+
+<h1 class="display-3 text-center">Customer Status</h1>
+
+<table class="table">
+	<thead class="thead-dark">
+	<tr>
+		<th scope="col">#</th>
+		<th scope="col">SSN ID</th>
+		<th scope="col">Customer ID</th>
+		<th scope="col">Status</th>
+		<th scope="col">Message</th>
+		<th scope="col">Last Updated</th>
+		<th scope="col">Operations</th>
+		<th scope="col">View Profile</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<th scope="row">1</th>
+		<td>Loop on this</td>
+		<td>tr tag</td>
+		<td>start loop before tr tag</td>
+		<td>start loop before tr tag</td>
+		<td>start loop before tr tag</td>
+		<td><a href="">Refresh</a></td>
+		<td><a href="{{url_for('executives.customer_profile')}}">View Profile</a></td>
+	</tr>
+	</tbody>
+</table>
+
+{% endblock %}
