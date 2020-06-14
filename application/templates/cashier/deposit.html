@@ -4,25 +4,26 @@
 {% block page %}
 
 <h1 class="display-3 text-center">Deposit Money</h1>
+{% if cust %}
 <form action="" method="post">
 	<div class="container text-center">
 		<table class="table">
 			<tbody>
 			<tr>
 				<th scope="col">Customer ID</th>
-				<td><input disabled id="cust_id" pattern=".{9}" required type="number"></td>
+				<td><input disabled id="cust_id" pattern=".{9}" value="{{cust.id}}" required type="number"></td>
 			</tr>
 			<tr>
 				<th scope="col">Account ID</th>
-				<td><input disabled id="acct_id" pattern=".{9}" required type="number"></td>
+				<td><input disabled id="acct_id" pattern=".{9}" value="{{cust.aid}}" required type="number"></td>
 			</tr>
 			<tr>
 				<th scope="col">Account Type</th>
-				<td><input disabled id="acct_type" required type="text"></td>
+				<td><input disabled id="acct_type" value="{{cust.atpye}}" required type="text"></td>
 			</tr>
 			<tr>
 				<th scope="col">Balance</th>
-				<td><input disabled id="bal" required type="number"></td>
+				<td><input disabled id="bal" value="{{cust.balance}}" required type="number"></td>
 			</tr>
 			<tr>
 				<th scope="amt">Deposit Amount</th>
@@ -38,4 +39,6 @@
 		</table>
 	</div>
 </form>
+<button class="btn btn-primary">Hello</button>
+{% endif %}
 {% endblock %}

@@ -1,5 +1,7 @@
 from flask import render_template, Blueprint, request, redirect, url_for, abort, flash
 from flask_login import current_user, login_required
+from . models import  customerAccount
+from . import db
 
 executives = Blueprint('executives', __name__)
 login = 1
@@ -30,10 +32,22 @@ def customer_status():
     return render_template('executive/customer/status.html', login=login)
 
 
-@executives.route('/search-customer')
+@executives.route('/search-customer',  methods=['GET','POST'])
 @login_required
 def search_customer():
-    return render_template('executive/customer/search.html', login=login)
+    #dummy()
+    cid = request.form.get('search_cust_id')
+    aid = request.form.get('search_acc_id')
+    cust = None
+    if cid:
+        cust = customerAccount.query.filter_by(id = cid).first()
+    elif aid:
+        cust = customerAccount.query.filter_by(aid =aid).first()
+    if cust:
+        print(cust.status)
+        return render_template('cashier/account_detail.html', login=login, cust = cust)
+
+    return render_template('cashier/account_detail.html', login=login)
 
 
 @executives.route('/customer-profile')
@@ -66,3 +80,9 @@ def account_status():
 @login_required
 def search_account():
     return render_template('executive/account/search.html', login=login)
+
+
+def dummy():
+    customer = customerAccount(id=1, ssn=987654321, aid=123789456, atpye=0, status='Active', msg=None)
+    db.session.add(customer)
+    db.session.commit()

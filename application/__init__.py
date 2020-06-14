@@ -37,7 +37,6 @@ def create_app():
 
     # blueprint for auth routes in our app
     from .auth import auth as auth_blueprint
-
     app.register_blueprint(auth_blueprint)
 
     # blueprint for non-auth parts of app
@@ -47,14 +46,10 @@ def create_app():
 
     # blueprint/routes for executives parts of app
     from .executives import executives as exec_blueprint
-
     app.register_blueprint(exec_blueprint)
 
     # blueprint/routes for cashier parts of app
     from .cashier import cashier as cashier_blueprint
-
     app.register_blueprint(cashier_blueprint)
-
-
     return app
-#sai?
+

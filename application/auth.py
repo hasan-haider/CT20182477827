@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
-from .models import User
+from .models import User,customerAccount
 from . import db
 
 auth = Blueprint('auth', __name__)
@@ -49,11 +49,11 @@ def signup_post():
 @auth.route('/login-post', methods=['GET','POST'])
 def login_post():
     if request.method == 'POST':
-        print(request.form.get('uname'))
+        #print(request.form.get('uname'))
         uname = request.form.get('uname')
         password = request.form.get('inputPassword')
         # remember = True if request.form.get('remember') else False
-        print("Hi Iam performing auth")
+        #print("Hi Iam performing auth")
         # usr = User(userId=email, password=password, type=0)
         # db.session.add(usr)
         # db.session.commit()
@@ -63,12 +63,13 @@ def login_post():
         # print(user.userId)
         # check if user actually exists
         # take the user supplied password, hash it, and compare it to the hashed password in database
-        print(uname == user.userId, check_password_hash(user.password, password))
-        if uname == user.userId and check_password_hash(user.password, password):
-            login_user(user)
-            session['u_type'] = user.type
-            session['logged_in'] = True
-            return redirect(url_for('routes.index'))
+        #print(uname == user.userId, check_password_hash(user.password, password))
+        if user:
+            if uname == user.userId and check_password_hash(user.password, password):
+                login_user(user)
+                session['u_type'] = user.type
+                session['logged_in'] = True
+                return redirect(url_for('routes.index'))
 
     flash('Please check your login details and try again.')
 
@@ -85,3 +86,26 @@ def login_post():
 def logout():
     logout_user()
     return redirect(url_for('routes.login'))  # address of index page
+
+
+@auth.route('/search-customer',  methods=['GET','POST'])
+@login_required
+def search_customer():
+    #dummy()
+    cid = request.form.get('search_cust_id')
+    aid = request.form.get('search_acc_id')
+    cust = None
+    if cid:
+        cust = customerAccount.query.filter_by(id = cid).first()
+    elif aid:
+        cust = customerAccount.query.filter_by(aid =aid).first()
+    if cust:
+        print(cust.id)
+        return render_template('cashier/account_detail.html', login=0, cust = cust)
+
+    return render_template('cashier/account_detail.html', login=0)
+
+def dummy():
+    customer = customerAccount(id=00000000, ssn=00000000, aid=000000000, atpye=0, status='Active', msg=None, balance = 500)
+    db.session.add(customer)
+    db.session.commit()
