@@ -107,5 +107,9 @@ def search_customer():
 
 def dummy():
     customer = customerAccount(id=123456789, ssn=00000000, aid=000000000, atpye=0, status='Active', msg=None, balance = 500)
+    customer1 = customerAccount(id=123456123, ssn=00000000, aid=000000000, atpye=0, status='Active', msg=None, balance = 1000)
+    customer3 = customerAccount(id=123456789, ssn=00000000, aid=000000000, atpye=0, status='Active', msg=None, balance = 1000)
     db.session.add(customer)
+    db.session.add(customer1)
+    db.session.add(customer3)
     db.session.commit()
