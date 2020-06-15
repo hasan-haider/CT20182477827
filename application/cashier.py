@@ -56,7 +56,7 @@ def deduct(cust_data):
     cust = customerAccount.query.filter_by(id=cust_data).first()
     #cust.balance = 10000
     #db.session.commit()
-    if int(cust.balance) >= int(wamt) and int(cust.balance) >0:
+    if int(cust.balance) >= int(wamt) and int(cust.balance) >0 and int(wamt)>0:
         cust.balance = int(cust.balance) - int(wamt)
         db.session.commit()
         return render_template('cashier/account_detail.html', login=login, cust = cust)
@@ -72,10 +72,12 @@ def add(cust_data):
     cust = customerAccount.query.filter_by(id=cust_data).first()
     #cust.balance = 10000
     #db.session.commit()
+    if int(wamt) >0:
+        cust.balance = int(cust.balance) + int(wamt)
+        db.session.commit()
+        return render_template('cashier/account_detail.html', login=login, cust = cust)
 
-    cust.balance = int(cust.balance) + int(wamt)
-    db.session.commit()
-    return render_template('cashier/account_detail.html', login=login, cust = cust)
+    return render_template('cashier/deposit.html', login=login, cust=cust)
 
 @cashier.route('/transfercust-<cust_data>', methods = ['GET', 'POST'])
 @login_required
@@ -85,12 +87,13 @@ def transfercust(cust_data):
     type = request.form.get('t_acc_type')
     cust = customerAccount.query.filter_by(id=cust_data).first()
     tar = customerAccount.query.filter_by(id=tarid).first()
-    if tar.atpye== 0:
-        ttype = "Savings"
-    else:
-        ttype = "Current"
+    if tar:
+        if tar.atpye== 0:
+            ttype = "Savings"
+        else:
+            ttype = "Current"
 
-    if  tar and int(cust.balance)>0 and int(cust.balance)>= int(wamt) and int(cust.id)!=int(tar.id) and type == ttype:
+    if  tar and int(cust.balance)>0 and int(cust.balance)>= int(wamt) and int(cust.id)!=int(tar.id) and type == ttype and int(wamt)>0:
         cust.balance = int(cust.balance) - int(wamt)
         tar.balance = int(tar.balance) + int(wamt)
         db.session.commit()
