@@ -18,6 +18,7 @@ class customerAccount(db.Model):
     ssn = db.Column(db.Integer, nullable = False)
     aid = db.Column(db.Integer, nullable = False)
     atpye = db.Column(db.Integer, nullable = False)
+    #0 - saving and 1- current
     status = db.Column(db.String(10), nullable = False)
     msg = db.Column(db.String(500))
     lastUpdated = db.Column(db.DateTime, default = datetime.now)

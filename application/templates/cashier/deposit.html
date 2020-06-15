@@ -5,13 +5,13 @@
 
 <h1 class="display-3 text-center">Deposit Money</h1>
 {% if cust %}
-<form action="" method="post">
+<form action="{{url_for('cashier.add', cust_data = cust.id)}}" method="post">
 	<div class="container text-center">
 		<table class="table">
 			<tbody>
 			<tr>
 				<th scope="col">Customer ID</th>
-				<td><input disabled id="cust_id" pattern=".{9}" value="{{cust.id}}" required type="number"></td>
+				<td><input disabled id="cust_id" name = "cust_id" pattern=".{9}" value="{{cust.id}}" required type="number"></td>
 			</tr>
 			<tr>
 				<th scope="col">Account ID</th>
@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<th scope="amt">Deposit Amount</th>
-				<td><input id="amt" placeholder="Enter amount" required type="number"></td>
+				<td><input id="wamt" name = "wamt" placeholder="Enter amount" required type="number"></td>
 			</tr>
 			<tr>
 				<td><a class="btn btn-warning form-control" href="{{url_for('cashier.account_detail')}}">Cancel</a></td>

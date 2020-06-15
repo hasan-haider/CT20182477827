@@ -8,3 +8,9 @@ Admin can change its password
 Others cannot change their password.
 Admin can change others password and changed password will be sent via mail to users.
 
+#Shahanawaz
+# sample custid for search:
+000000000 or 123456789
+# sample login
+admin 0000
+cust accnt type: 0- saving 1- currrent

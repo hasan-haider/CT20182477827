@@ -106,6 +106,6 @@ def search_customer():
     return render_template('cashier/account_detail.html', login=0)
 
 def dummy():
-    customer = customerAccount(id=00000000, ssn=00000000, aid=000000000, atpye=0, status='Active', msg=None, balance = 500)
+    customer = customerAccount(id=123456789, ssn=00000000, aid=000000000, atpye=0, status='Active', msg=None, balance = 500)
     db.session.add(customer)
     db.session.commit()

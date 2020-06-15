@@ -14,7 +14,7 @@ def create_customer():
     return render_template('executive/customer/create.html', login=login)
 
 
-@executives.route('/update-customer')
+@executives.route('/update-customer', methods = ['GET', 'POST'])
 @login_required
 def update_customer():
     return render_template('executive/customer/update.html', login=login)
