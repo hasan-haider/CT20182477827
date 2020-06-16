@@ -4,7 +4,7 @@
 {% block page %}
 
 <h1 class="display-3 text-center">Account Statement</h1>
-<form action="" method="post">
+<form action="{{url_for('cashier.get_statements')}}" method="post">
 	<div class="container">
 		<div class="row m-2">
 			<div class="col">
@@ -58,7 +58,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input class="form-control" id="start_date" type="date">
+					<input class="form-control" id="start_date" name="start_date" type="date">
 				</div>
 			</div>
 		</div>
@@ -68,7 +68,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input class="form-control" id="end_date" type="date">
+					<input class="form-control" id="end_date" name="end_date" type="date">
 				</div>
 			</div>
 		</div>

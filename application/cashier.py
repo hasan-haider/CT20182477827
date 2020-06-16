@@ -1,8 +1,13 @@
 from flask import render_template, Blueprint, request, redirect, url_for, abort, flash
 from flask_login import login_required
 from . import db
-
+from . models import Transaction
 from application.models import customerAccount
+import datetime
+from sqlalchemy import func
+import pdfkit
+from flask import make_response
+
 
 cashier = Blueprint('cashier', __name__)
 login = 0
@@ -45,6 +50,70 @@ def withdraw(cust_data):
 @cashier.route('/get-statements')
 @login_required
 def statements():
+    return render_template('cashier/statements.html', login=login)
+
+@cashier.route('/statements',methods = ['GET', 'POST'] )
+@login_required
+def get_statements():
+    #dummy()
+    id = request.form.get('acc_id')
+    tran = request.form.get('transaction_type')
+    no = request.form.get('num_of_t')
+    sd = request.form.get('start_date')
+    ed =request.form.get('end_date')
+    print(id, tran, no, sd, ed)
+    if sd and ed and tran == "Start and end date" and no:
+        #sc = Transaction.query.filter(func.DATE(Transaction.dt) >= sd, func.DATE(Transaction.dt) <= ed, Transaction.cid == id ).count()
+        s = Transaction.query.filter(func.DATE(Transaction.dt) >= sd, func.DATE(Transaction.dt) <= ed,
+                                       Transaction.cid == id).order_by(Transaction.Tid.desc()).limit(no)
+        if s:
+            for i in s:
+                print(i.cid, i.dt)
+            ren = render_template('cashier/stat.html', login=login, s = s)
+            pdf = pdfkit.from_string(ren, False)
+            response = make_response(pdf)
+            response.headers['content-Type'] = 'application/pdf'
+            response.headers['content-Disposition'] = 'inline; filename = statement.pdf'
+            return response
+
+    elif sd and ed and tran == "Start and end date":
+        s = Transaction.query.filter(func.DATE(Transaction.dt) >= sd, func.DATE(Transaction.dt) <= ed,
+                                     Transaction.cid == id).order_by(Transaction.Tid.desc())
+        if s:
+            for i in s:
+                print(i.cid, i.dt)
+            ren = render_template('cashier/stat.html', login=login, s=s)
+            pdf = pdfkit.from_string(ren, False)
+            response = make_response(pdf)
+            response.headers['content-Type'] = 'application/pdf'
+            response.headers['content-Disposition'] = 'inline; filename = statement.pdf'
+            return response
+
+    elif not sd and not ed and tran =="Last transactions" and no :
+        s = Transaction.query.filter(Transaction.cid == id).order_by(Transaction.Tid.desc()).limit(no)
+        if s:
+            for i in s:
+                print(i.cid, i.dt)
+            ren = render_template('cashier/stat.html', login=login, s=s)
+            pdf = pdfkit.from_string(ren, False)
+            response = make_response(pdf)
+            response.headers['content-Type'] = 'application/pdf'
+            response.headers['content-Disposition'] = 'inline; filename = statement.pdf'
+            return response
+
+    elif not sd and not ed and tran =="Last transactions":
+        s = Transaction.query.filter(Transaction.cid == id).order_by(Transaction.Tid.desc())
+        if s:
+            for i in s:
+                print(i.cid, i.dt)
+            ren = render_template('cashier/stat.html', login=login, s=s)
+            pdf = pdfkit.from_string(ren, False)
+            response = make_response(pdf)
+            response.headers['content-Type'] = 'application/pdf'
+            response.headers['content-Disposition'] = 'inline; filename = statement.pdf'
+            return response
+
+
     return render_template('cashier/statements.html', login=login)
 
 @cashier.route('/deduct-<cust_data>', methods = ['GET', 'POST'])
@@ -100,3 +169,25 @@ def transfercust(cust_data):
         return render_template('cashier/account_detail.html', login=login, cust=cust)
 
     return render_template('cashier/transfer.html', login=login, cust = cust)
+'''
+def dummy():
+    t = Transaction(cid = 12345, type = "Deposit", dt = datetime.datetime(2020,5,17,10,10,10))
+    t1 = Transaction(cid=12345, type="Deposit", dt=datetime.datetime(2020, 5, 18, 10, 10, 10))
+    t2 = Transaction(cid=12345, type="Deposit", dt=datetime.datetime(2020, 5, 19, 10, 10, 10))
+    t3 = Transaction(cid=12345, type="Deposit", dt=datetime.datetime(2020, 5, 20, 10, 10, 10))
+    t4 = Transaction(cid=12345, type="Deposit", dt=datetime.datetime(2020, 5, 21, 10, 10, 10))
+    t5 = Transaction(cid=12345, type="Deposit", dt=datetime.datetime(2020, 5, 22, 10, 10, 10))
+    t6= Transaction(cid=12345, type="Deposit", dt=datetime.datetime(2020, 5, 23, 10, 10, 10))
+    t7 = Transaction(cid=12345, type="Deposit", dt=datetime.datetime(2020, 5, 24, 10, 10, 10))
+    t8 = Transaction(cid=12345, type="Deposit", dt=datetime.datetime(2020, 5, 25, 10, 10, 10))
+    db.session.add(t)
+    db.session.add(t1)
+    db.session.add(t2)
+    db.session.add(t3)
+    db.session.add(t4)
+    db.session.add(t5)
+    db.session.add(t6)
+    db.session.add(t7)
+    db.session.add(t8)
+    db.session.commit()
+'''
