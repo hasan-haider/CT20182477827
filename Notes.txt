@@ -11,3 +11,8 @@ Admin can change others password and changed password will be sent via mail to u
 #Shahanawaz
 cust accnt type: 0- saving 1- currrent
 In auth.py there is one dummy function run it only one time
+
+#hasan
+automatically create admin account on startup
+username: admin
+password: admin123

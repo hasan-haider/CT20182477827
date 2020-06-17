@@ -25,11 +25,12 @@ def create_app():
     login_manager.login_view = 'routes.login'
     login_manager.init_app(app)
     # return app
-    db.create_all(app=app)
+    if db.create_all(app=app):
+        db.create_all(app=app)
 
-    #usr = User(userId="admin", password="123456", type=0)
-    #db.session.add(usr)
-    #db.session.commit()
+    # usr = User(userId="admin", password="123456", type=0)
+    # db.session.add(usr)
+    # db.session.commit()
     @login_manager.user_loader
     def load_user(user_id):
         # since the user_id is just the primary key of our user table, use it in the query for the user
@@ -41,7 +42,6 @@ def create_app():
 
     # blueprint for non-auth parts of app
     from .routes import unauth_routes as routes_blueprint
-
     app.register_blueprint(routes_blueprint)
 
     # blueprint/routes for executives parts of app

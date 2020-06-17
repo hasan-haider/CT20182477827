@@ -9,28 +9,30 @@
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
 
-			{% if login==1 %}
+			{% if current_user.is_executive() %}
 
 			{% include 'includes/executive_nav.html' %}
 			<li class="nav-item ">
 				<a class="nav-link" href="/logout">Logout</a>
 			</li>
-			{% elif login==0 %}
+			{% elif current_user.is_cashier() %}
 
 			{% include 'includes/cashier_nav.html' %}
 			<li class="nav-item ">
 				<a class="nav-link" href="/logout">Logout</a>
 			</li>
+			{% elif current_user.is_admin() %}
 
+			{% include 'includes/admin_nav.html' %}
+			<li class="nav-item ">
+				<a class="nav-link" href="/logout">Logout</a>
+			</li>
 			{% else %}
 			<li class="nav-item">
 				<a class="nav-link" href="/">Home</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="{{url_for('routes.login')}}">Login</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{url_for('routes.register')}}">Register</a>
 			</li>
 			{% endif %}
 

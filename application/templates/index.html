@@ -10,7 +10,12 @@
 	<div class="card-body text-center">
 		<h1 class="display-1">Xplore Bank</h1>
 		<h1 class="h3 mb-3 font-weight-normal">Welcome
-			{% if login==1 %}Customer Executive{%elif login==0 %} Cashier
+			{% if current_user.is_executive() %}
+			Customer Executive
+			{%elif current_user.is_cashier() %}
+			Cashier
+			{%elif current_user.is_admin() %}
+			Administrator
 			{%endif%} to Xplore Bank</h1>
 	</div>
 	<div class="card-footer text-muted">
